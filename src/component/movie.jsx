@@ -1,20 +1,20 @@
-import {
-  deleteMovie,
-  getMovies,
-} from "../services/fakeMovieService";
+import { deleteMovie, getMovies } from "../services/fakeMovieService";
 import { Component } from "react";
 
 class Movie extends Component {
   state = { movies: getMovies() };
 
   handleDelete = (movieId) => {
-    const movies = this.state.movies.filter(movie => movie._id !== movieId);
+    const movies = this.state.movies.filter((movie) => movie._id !== movieId);
     this.setState({ movies });
     deleteMovie(movieId);
   };
 
   render() {
     return (
+       <div>
+        {this.state.movies.length === 0 && <h2> There are no movies in the database DUCON</h2>}
+        {this.state.movies.length > 0 && (<div> <h2>Showing {this.state.movies.length} movies in the database</h2>
       <table className="table">
         <thead>
           <tr>
@@ -43,7 +43,9 @@ class Movie extends Component {
             </tr>
           ))}
         </tbody>
-      </table>
+      </table> </div>)}
+       
+      </div>
     );
   }
 }
