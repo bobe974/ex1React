@@ -1,10 +1,11 @@
 
 import './App.css';
+import Movies from './component/movie'
 
 function App() {
   return (
     <div className="container">
-     <p>SALUT</p>
+      <Movies></Movies>
     </div>
   );
 }

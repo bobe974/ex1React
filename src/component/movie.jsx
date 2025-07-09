@@ -1,5 +1,6 @@
 import { deleteMovie, getMovies } from "../services/fakeMovieService";
 import { Component } from "react";
+import React from "react";
 
 class Movie extends Component {
   state = { movies: getMovies() };
@@ -11,10 +12,12 @@ class Movie extends Component {
   };
 
   render() {
+    const {length: count} = this.state.movies;
+     if (count === 0 )  return <h2> There are no movies in the database DUCON</h2>
     return (
-       <div>
-        {this.state.movies.length === 0 && <h2> There are no movies in the database DUCON</h2>}
-        {this.state.movies.length > 0 && (<div> <h2>Showing {this.state.movies.length} movies in the database</h2>
+       <React.Fragment>
+    
+       <h2>Showing {count} movies in the database</h2>
       <table className="table">
         <thead>
           <tr>
@@ -43,9 +46,8 @@ class Movie extends Component {
             </tr>
           ))}
         </tbody>
-      </table> </div>)}
-       
-      </div>
+      </table> 
+        </React.Fragment>
     );
   }
 }
