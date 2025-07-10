@@ -1,15 +1,21 @@
 import { deleteMovie, getMovies } from "../services/fakeMovieService";
 import { Component } from "react";
 import React from "react";
+import Heart from "./heart";
 
 class Movie extends Component {
-  state = { movies: getMovies() };
+  state = { movies: getMovies(), isliked: false};
 
   handleDelete = (movieId) => {
     const movies = this.state.movies.filter((movie) => movie._id !== movieId);
     this.setState({ movies });
     deleteMovie(movieId);
   };
+
+  handleLike = () => {
+    console.log("handle click ! value " + this.state.movies)
+    
+  }
 
   render() {
     const {length: count} = this.state.movies;
@@ -35,6 +41,7 @@ class Movie extends Component {
               <td>{movie.genre.name}</td>
               <td>{movie.numberInStock}</td>
               <td>{movie.dailyRentalRate}</td>
+              <td><Heart onLike= {() => this.handleLike(movie)} isLiked={movie.liked} ></Heart></td>
               <td>
                 <button
                   className="btn btn-danger"
