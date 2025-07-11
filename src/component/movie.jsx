@@ -4,7 +4,7 @@ import React from "react";
 import Heart from "./heart";
 
 class Movie extends Component {
-  state = { movies: getMovies(), isliked: false};
+  state = { movies: getMovies()};
 
   handleDelete = (movieId) => {
     const movies = this.state.movies.filter((movie) => movie._id !== movieId);
@@ -12,9 +12,12 @@ class Movie extends Component {
     deleteMovie(movieId);
   };
 
-  handleLike = () => {
+  handleLike = (movie) => {
     console.log("handle click ! value " + this.state.movies)
-    
+    const movies = [...this.state.movies];
+    const index = movies.findIndex((e)=>e._id === movie._id)
+    movies[index].liked = ! movies[index].liked;
+    this.setState(movies)
   }
 
   render() {
