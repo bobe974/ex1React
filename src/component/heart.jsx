@@ -3,7 +3,6 @@
 
     render() { 
         let classes = "fa fa-heart";
-        console.log("isliked from heart " + this.props.isLiked)
         if(!this.props.isLiked) classes += "-o";
         return (
 

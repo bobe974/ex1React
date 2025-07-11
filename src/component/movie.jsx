@@ -2,9 +2,10 @@ import { deleteMovie, getMovies } from "../services/fakeMovieService";
 import { Component } from "react";
 import React from "react";
 import Heart from "./heart";
+import Pagination from "./pagination";
 
 class Movie extends Component {
-  state = { movies: getMovies()};
+  state = { movies: getMovies(), pageSize: 2, currentPage: 1};
 
   handleDelete = (movieId) => {
     const movies = this.state.movies.filter((movie) => movie._id !== movieId);
@@ -13,15 +14,27 @@ class Movie extends Component {
   };
 
   handleLike = (movie) => {
-    console.log("handle click ! value " + this.state.movies)
     const movies = [...this.state.movies];
     const index = movies.findIndex((e)=>e._id === movie._id)
     movies[index].liked = ! movies[index].liked;
     this.setState(movies)
   }
 
+  handleChangePage = (page) =>{
+    //diviser le tableau de films en x partie
+    const movies = [...this.state.movies]
+    const numElementPerPage = movies.length / this.state.pageSize;
+    console.log("PAGE " + page)
+    this.setState({currentPage: page})
+    //const lastElement = numElementPerPage *  movies.length
+    //const firstElement = 
+    //movies.slice()
+  }
+
   render() {
     const {length: count} = this.state.movies;
+    const {pageSize, currentPage} = this.state
+
      if (count === 0 )  return <h2> There are no movies in the database DUCON</h2>
     return (
        <React.Fragment>
@@ -57,6 +70,7 @@ class Movie extends Component {
           ))}
         </tbody>
       </table> 
+          <Pagination itemsCount={count} pageSize={pageSize} changePage= {this.handleChangePage} currentPage = {currentPage}></Pagination>
         </React.Fragment>
     );
   }
