@@ -3,6 +3,7 @@ import { Component } from "react";
 import React from "react";
 import Heart from "./heart";
 import Pagination from "./pagination";
+import { paginate } from "../utils/paginate";
 
 class Movie extends Component {
   state = { movies: getMovies(), pageSize: 2, currentPage: 1};
@@ -36,6 +37,7 @@ class Movie extends Component {
     const {pageSize, currentPage} = this.state
 
      if (count === 0 )  return <h2> There are no movies in the database DUCON</h2>
+     const paginatemovies = paginate(this.state.movies, this.state.pageSize)
     return (
        <React.Fragment>
     

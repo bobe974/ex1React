@@ -7,6 +7,8 @@ const pagination = (props) => {
   const pages = _.range(1, pageCount + 1);
 
   console.log("currentPage " + currentPage)
+   console.log("itemcount*** " + itemsCount)
+    console.log("page size " + pageSize)
   //const isSelected = (currentPage === page)
   return (
     <div>
